@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IdentityServerHost.Quickstart.UI
@@ -20,7 +21,13 @@ namespace IdentityServerHost.Quickstart.UI
          }
 
          var model = new DiagnosticsViewModel(await HttpContext.AuthenticateAsync());
-         var x = model.AuthenticateResult.Principal.Claims.ToList();
+         
+
+
+         if (model.AuthenticateResult.Principal.HasClaim(c => c.Type == "urn:google:picture")) {
+            var x = model.AuthenticateResult.Principal.Claims.ToList();
+         }
+         
 
          return View(model);
       }

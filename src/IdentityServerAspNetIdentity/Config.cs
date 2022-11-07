@@ -15,6 +15,7 @@ namespace IdentityServerAspNetIdentity
             {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
+
             };
 
         public static IEnumerable<ApiScope> ApiScopes =>
@@ -34,7 +35,8 @@ namespace IdentityServerAspNetIdentity
 
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 // scopes that client has access to
-                AllowedScopes = { "api1" }
+                AllowedScopes = { "api1",   
+                    IdentityServerConstants.StandardScopes.Profile, }
             },
 
             // interactive ASP.NET Core MVC client
