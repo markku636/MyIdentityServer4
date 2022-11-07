@@ -133,6 +133,7 @@ namespace IdentityServerHost.Quickstart.UI
                         DisplayName = user.Username
                     };
 
+
                     await HttpContext.SignInAsync(isuser, props);
 
                     if (context != null)

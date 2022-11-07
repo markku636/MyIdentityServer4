@@ -15,6 +15,12 @@ namespace IdentityServerAspNetIdentity
             {
             new IdentityResources.OpenId(),
             new IdentityResources.Profile(),
+                new IdentityResource {
+    Name = "picture",
+    UserClaims = new List<string> {"picture" }
+}
+
+
 
             };
 

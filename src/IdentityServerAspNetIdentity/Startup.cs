@@ -4,6 +4,7 @@
 using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4;
+using IdentityServer4.Services;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
 using Microsoft.AspNetCore.Authentication;
@@ -39,7 +40,7 @@ namespace IdentityServerAspNetIdentity
              .AddEntityFrameworkStores<ApplicationDbContext>()
              .AddDefaultTokenProviders();
 
-
+         services.AddTransient<IProfileService, CustomerProfileService>();
 
          var builder = services.AddIdentityServer(options => {
             options.Events.RaiseErrorEvents = true;
@@ -53,11 +54,8 @@ namespace IdentityServerAspNetIdentity
              .AddInMemoryIdentityResources(Config.IdentityResources)
              .AddInMemoryApiScopes(Config.ApiScopes)
              .AddInMemoryClients(Config.Clients)
-             .AddAspNetIdentity<ApplicationUser>().AddProfileService<ImplicitProfileService>(); // identityServer4要携带自定义的Claim，仅仅传递Claim是不行的 还需要实现IProfileService方法才行
 
-
-
-
+             .AddAspNetIdentity<ApplicationUser>().AddProfileService<CustomerProfileService>(); // identityServer4要携带自定义的Claim，仅仅传递Claim是不行的 还需要实现IProfileService方法才行
 
          // not recommended for production - you need to store your key material somewhere secure
          builder.AddDeveloperSigningCredential();
@@ -94,19 +92,16 @@ namespace IdentityServerAspNetIdentity
                 options.SaveTokens = true;
                 options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
                 options.CorrelationCookie.IsEssential = true;
-             }).AddDiscord("BDiscord", options =>
-             {
+             }).AddDiscord("BDiscord", options => {
                 options.ClientId = "829495062073180162";
                 options.ClientSecret = "Gyjh4m2Aw2iVWk2GkfnTgTu-WaEfo6cG";
-                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;                
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                 options.SaveTokens = true;
                 options.Scope.Add("guilds.join");
                 options.Scope.Add("email");
                 options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
                 options.CorrelationCookie.IsEssential = true;
-
-             }).AddFacebook(options =>
-             {
+             }).AddFacebook(options => {
                 options.AppId = "518075099514324";
                 options.AppSecret = "88a1ff92458f159ad82297fdc401c3b9";
                 options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
@@ -116,9 +111,6 @@ namespace IdentityServerAspNetIdentity
              });
 
          //https://localhost:5001/signin-github
-
-
-
       }
 
       public void Configure(IApplicationBuilder app) {

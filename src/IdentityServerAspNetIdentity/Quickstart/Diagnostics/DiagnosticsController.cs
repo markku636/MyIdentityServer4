@@ -24,9 +24,9 @@ namespace IdentityServerHost.Quickstart.UI
          
 
 
-         if (model.AuthenticateResult.Principal.HasClaim(c => c.Type == "urn:google:picture")) {
+         
             var x = model.AuthenticateResult.Principal.Claims.ToList();
-         }
+         
          
 
          return View(model);
