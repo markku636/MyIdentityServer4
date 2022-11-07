@@ -63,7 +63,7 @@ namespace IdentityServerAspNetIdentity
                 options.ClientSecret = "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";
              }).AddGitHub(options => {
                 options.ClientId = "Iv1.6744f15c68d729c9";
-                options.ClientSecret = "1f93721080cff1ebe5b3f74fd0d33f53182e1091 ";
+                options.ClientSecret = "1f93721080cff1ebe5b3f74fd0d33f53182e1091";
                 options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
                 options.SaveTokens = true;
                 options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
