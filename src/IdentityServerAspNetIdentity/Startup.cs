@@ -74,9 +74,19 @@ namespace IdentityServerAspNetIdentity
                 options.ClientSecret = "Gyjh4m2Aw2iVWk2GkfnTgTu-WaEfo6cG";
                 options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;                
                 options.SaveTokens = true;
+                options.Scope.Add("guilds.join");
+                options.Scope.Add("email");
                 options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
                 options.CorrelationCookie.IsEssential = true;
 
+             }).AddFacebook(options =>
+             {
+                options.AppId = "518075099514324";
+                options.AppSecret = "88a1ff92458f159ad82297fdc401c3b9";
+                options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                options.SaveTokens = true;
+                options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
+                options.CorrelationCookie.IsEssential = true;
              });
 
          //https://localhost:5001/signin-github
