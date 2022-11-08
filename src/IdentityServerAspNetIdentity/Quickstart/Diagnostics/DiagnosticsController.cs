@@ -20,15 +20,8 @@ namespace IdentityServerHost.Quickstart.UI
             return NotFound();
          }
 
-         var model = new DiagnosticsViewModel(await HttpContext.AuthenticateAsync());
+         var model = new DiagnosticsViewModel(await HttpContext.AuthenticateAsync());                                        
          
-
-
-         
-            var x = model.AuthenticateResult.Principal.Claims.ToList();
-         
-         
-
          return View(model);
       }
    }
