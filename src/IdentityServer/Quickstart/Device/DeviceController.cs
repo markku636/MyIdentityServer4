@@ -122,7 +122,7 @@ namespace IdentityServerHost.Quickstart.UI
             }
             else
             {
-                result.ValidationError = ConsentOptions.InvalidSelectionErrorMessage;
+                result.ValidationError = ConsentOptions. InvalidSelectionErrorMessage;
             }
 
             if (grantedConsent != null)

@@ -22,7 +22,8 @@ var config = {
     redirect_uri: "https://localhost:5003/callback.html",
     response_type: "code",
     scope:"openid profile api1",
-    post_logout_redirect_uri : "https://localhost:5003/index.html",
+    post_logout_redirect_uri: "https://localhost:5003/index.html",
+  
 };
 var mgr = new Oidc.UserManager(config);
 
@@ -39,7 +40,11 @@ mgr.getUser().then(function (user) {
 
 
 function login() {
-    mgr.signinRedirect();
+   mgr.signinRedirect({
+      extraQueryParams: {
+         loginType: "Google"
+      },
+   });
 }
 
 function api() {
