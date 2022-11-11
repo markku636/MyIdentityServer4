@@ -18,6 +18,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using static System.Net.WebRequestMethods;
 
 namespace IdentityServerAspNetIdentity
@@ -43,6 +44,13 @@ namespace IdentityServerAspNetIdentity
              .AddDefaultTokenProviders();
 
          services.AddTransient<IProfileService, ProfileService>();
+
+         services.AddSingleton<ICorsPolicyService>((container) => {
+            var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
+            return new DefaultCorsPolicyService(logger) {
+               AllowAll = true
+            };
+         });
 
          var builder = services.AddIdentityServer(options => {
             options.Events.RaiseErrorEvents = true;

@@ -104,7 +104,7 @@ namespace IdentityServerHost.Quickstart.UI
 
          // issue authentication cookie for user
          // we must issue the cookie maually, and can't use the SignInManager because
-         // it doesn't expose an API to issue additional claims from the login workflow
+         // it doesn't expose an API to issue additional claims from the login workflowhttps://localhost:5003/callback
          var principal = await _signInManager.CreateUserPrincipalAsync(user);
          additionalLocalClaims.AddRange(principal.Claims);
          var name = principal.FindFirst(JwtClaimTypes.Name)?.Value ?? user.Id;
