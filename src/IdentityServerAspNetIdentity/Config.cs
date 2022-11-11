@@ -5,6 +5,7 @@
 using IdentityServer4.Models;
 using System.Collections.Generic;
 using IdentityServer4;
+using static System.Net.WebRequestMethods;
 
 namespace IdentityServerAspNetIdentity
 {
@@ -76,9 +77,9 @@ namespace IdentityServerAspNetIdentity
                     AllowedGrantTypes = GrantTypes.Code,
                     RequireClientSecret = false,
 
-                    RedirectUris =           { "https://localhost:5003/callback.html" },
-                    PostLogoutRedirectUris = { "https://localhost:5003/index.html" },
-                    AllowedCorsOrigins =     { "https://localhost:5003" },
+                    RedirectUris =           { "https://localhost:5003/callback.html" ,"http://localhost:3000/api/auth/callback/demo-identity-server"},
+                    PostLogoutRedirectUris = { "https://localhost:5003/index.html","http://localhost:3000/" },
+                    AllowedCorsOrigins =     { "https://localhost:5003","http://localhost:3000/" },
 
                     AllowedScopes =
                     {
