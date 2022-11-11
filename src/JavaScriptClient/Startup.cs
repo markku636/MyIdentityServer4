@@ -28,8 +28,9 @@ namespace JavaScriptClient
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
-            app.UseRouting();
+         app.UseHttpsRedirection();
+         app.UseHsts();
+         app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
