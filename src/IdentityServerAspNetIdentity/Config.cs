@@ -40,7 +40,7 @@ namespace IdentityServerAspNetIdentity
                 ClientId = "client",
                 ClientSecrets = { new Secret("secret".Sha256()) },
 
-                AllowedGrantTypes = GrantTypes.ClientCredentials,
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 // scopes that client has access to
                 AllowedScopes = { "api1",   
                     IdentityServerConstants.StandardScopes.Profile, }
@@ -80,6 +80,25 @@ namespace IdentityServerAspNetIdentity
                     RedirectUris =           { "https://localhost:5003/callback.html"},
                     PostLogoutRedirectUris = { "https://localhost:5003/index.html" },
                     AllowedCorsOrigins =     { "https://localhost:5003"},
+
+                    AllowedScopes =
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    }
+                },
+                 new Client
+                {
+                    ClientId = "nextjs",
+                    ClientName = "nextjs Client",
+                    AllowedGrantTypes = GrantTypes.Code,
+                    ClientSecrets = { new Secret("secret".Sha256()) },
+
+                    RedirectUris =           { "http://localhost:3000/api/auth/callback/identity-server4"},
+                    PostLogoutRedirectUris = { "https://localhost:5003/index.html" },
+                    AllowedCorsOrigins =     { "https://localhost:5003"},
+                          RequirePkce= false,
 
                     AllowedScopes =
                     {

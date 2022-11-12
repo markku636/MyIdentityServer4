@@ -8,6 +8,7 @@ using IdentityServer4;
 using IdentityServer4.Services;
 using IdentityServerAspNetIdentity.Data;
 using IdentityServerAspNetIdentity.Models;
+using IdentityServerHost.Quickstart.UI;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.OAuth;
 using Microsoft.AspNetCore.Builder;
@@ -60,7 +61,7 @@ namespace IdentityServerAspNetIdentity
 
             // see https://identityserver4.readthedocs.io/en/latest/topics/resources.html
             options.EmitStaticAudienceClaim = true;
-         })
+         }).AddTestUsers(TestUsers.Users)
              .AddInMemoryIdentityResources(Config.IdentityResources)
              .AddInMemoryApiScopes(Config.ApiScopes)
              .AddInMemoryClients(Config.Clients)
