@@ -1,17 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+   <meta charset="utf-8" />
+   <title></title>
 </head>
 <body>
-    <button id="login">Login</button>
-    <button id="api">Call API</button>
-    <button id="logout">Logout</button>
+   <h1>模擬多品牌電商平採用 OpenID Connect 登入</h1>
+   <button class="login" login-type="Google" onclick="login('Google')">Google Login</button>
+   <button class="login" login-type="Facebook" onclick="login('Facebook')">Facebook Login</button>
+   <button class="login" login-type="Github" onclick="login('GitHub')">Github Login</button>
+   <button class="login" login-type="Discord" onclick="login('BDiscord')">Discord Login</button>
+   
+   
+   <button id="api">Call API</button>
+   <button id="logout">Logout</button>
 
-    <pre id="results"></pre>
+   <pre id="results"></pre>
 
-    <script src="oidc-client.js"></script>
-    <script src="app.js"></script>
+   <script src="oidc-client.js"></script>
+   <script src="app.js"></script>
 </body>
 </html>

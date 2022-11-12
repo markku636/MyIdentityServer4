@@ -12,7 +12,7 @@ function log() {
     });
 }
 
-document.getElementById("login").addEventListener("click", login, false);
+
 document.getElementById("api").addEventListener("click", api, false);
 document.getElementById("logout").addEventListener("click", logout, false);
 
@@ -39,10 +39,11 @@ mgr.getUser().then(function (user) {
 
 
 
-function login() {
+function login(loginType) {
+   debugger
    mgr.signinRedirect({
       extraQueryParams: {
-         loginType: "Google"
+         loginType: loginType
       },
    });
 }
