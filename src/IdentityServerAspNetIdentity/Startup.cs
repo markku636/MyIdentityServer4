@@ -111,7 +111,7 @@ namespace IdentityServerAspNetIdentity
 
                 .AddGoogle(options => {
                     options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
-                    options.ClaimActions.MapUniqueJsonKey("xType", "xType");
+                    
 
                     // register your IdentityServer with Google at https://console.developers.google.com
                     // enable the Google+ API
@@ -119,7 +119,7 @@ namespace IdentityServerAspNetIdentity
                     options.ClientId = "439471082857-d8oeqq7dsbafc5c4bq3nmsh51p42jelv.apps.googleusercontent.com";
                     options.ClientSecret = "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";
                     options.Scope.Add("profile");
-                    options.ClaimActions.MapJsonKey("picture", "picture", "url");
+                    options.ClaimActions.MapJsonKey("image", "picture", "url");
                     options.ClaimActions.MapJsonKey("externalId", "id");
                     options.ClaimActions.MapJsonKey("email", "email");
 
@@ -132,7 +132,7 @@ namespace IdentityServerAspNetIdentity
                     };
                    options.SaveTokens = true;
                 }).AddGitHub(options => {
-                    options.ClaimActions.MapUniqueJsonKey("picture", "avatar_url");
+                    options.ClaimActions.MapUniqueJsonKey("image", "avatar_url");
                     options.ClaimActions.MapJsonKey("externalId", "id");
 
                    // github email default not public Keep my email addresses private disable
@@ -160,7 +160,7 @@ namespace IdentityServerAspNetIdentity
                             var nameidentifier = context.User.GetProperty("id").GetString();
                             var hash = context.User.GetProperty("avatar").GetString();
                             var picture = $"https://cdn.discordapp.com/avatars/{nameidentifier}/{hash}.webp?size=128";
-                            context.Identity.AddClaim(new Claim("picture", picture));
+                            context.Identity.AddClaim(new Claim("image", picture));
 
                             return Task.CompletedTask;
                         }
@@ -184,7 +184,7 @@ namespace IdentityServerAspNetIdentity
 
                             var picture = $"https://graph.facebook.com/{id}/picture?height={50}&width={50}&access_token={token.AccessToken}";
                             //var picture = $"https://graph.facebook.com/me?fields=picture.type(large)&access_token={identity}";
-                            context.Identity.AddClaim(new Claim("picture", picture));
+                            context.Identity.AddClaim(new Claim("image", picture));
 
                             return Task.CompletedTask;
                         }

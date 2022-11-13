@@ -108,11 +108,11 @@ namespace IdentityServerHost.Quickstart.UI
          additionalLocalClaims.AddRange(principal.Claims);
          var name = principal.FindFirst(JwtClaimTypes.Name)?.Value ?? user.Id;
 
-         var picture = result.Principal.Claims.Where(x => x.Type == "picture").Select(x => x.Value).FirstOrDefault();
+         var image = result.Principal.Claims.Where(x => x.Type == "image").Select(x => x.Value).FirstOrDefault();
 
-         if (picture == null) { picture = string.Empty; };
+         if (image == null) { image = string.Empty; };
 
-         additionalLocalClaims.Add(new Claim("picture", picture));
+         additionalLocalClaims.Add(new Claim("image", image));
 
          var email = result.Principal.Claims.Where(x => x.Type == "email").Select(x => x.Value).FirstOrDefault();
          if (email == null) {

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using IdentityServer4.Extensions;
 using IdentityServer4.Models;
@@ -35,23 +36,21 @@ namespace IdentityServerAspNetIdentity
 
             var customCliams = context.Subject.Claims.ToList();
 
-            List<string> requestedClaimTypes = new List<string>() { "email", "name", "externalId" };
+            List<string> requestedClaimTypes = new List<string>() { "email", "name",  "image" };
 
-            var newClaims = customCliams.Where(type => customCliams.Contains(type)).ToList();
+            //var newClaims = customCliams.Where(type => customCliams.Contains(type)).ToList();
 
-            //claims = claims.Where(claim => context.RequestedClaimTypes.Contains(claim.Type)).ToList();
+            var  newClaims = customCliams.Where(claim => requestedClaimTypes.Contains(claim.Type)).ToList();
 
             // Add custom claims in token here based on user properties or any other source
             //claims.Add(new Claim("employee_id", user.EmployeeId ?? string.Empty));
 
             context.IssuedClaims.AddRange(newClaims);
 
-            //   context.IssuedClaims = new List<Claim> {
-            //   new Claim("xType","xValue")
-            //};
+         //context.IssuedClaims.Add(new Claim("image", "xValue"));
 
-            //return Task.CompletedTask;
-        }
+         //return Task.CompletedTask;
+      }
 
         /// <summary>
         /// identity server需要确定用户是否有效
