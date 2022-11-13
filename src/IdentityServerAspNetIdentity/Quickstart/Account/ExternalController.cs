@@ -95,17 +95,16 @@ namespace IdentityServerHost.Quickstart.UI
             user = await AutoProvisionUserAsync(provider, providerUserId, claims);
          }
 
-         // this allows us to collect any additional claims or properties
-         // for the specific protocols used and store them in the local auth cookie.
-         // this is typically used to store data needed for signout from those protocols.
-         var additionalLocalClaims = new List<Claim>();
-         var localSignInProps = new AuthenticationProperties();
-         ProcessLoginCallback(result, additionalLocalClaims, localSignInProps);
 
          // issue authentication cookie for user
          // we must issue the cookie maually, and can't use the SignInManager because
          // it doesn't expose an API to issue additional claims from the login workflowhttps://localhost:5003/callback
          var principal = await _signInManager.CreateUserPrincipalAsync(user);
+
+         // this allows us to collect any additional claims or properties
+         // for the specific protocols used and store them in the local auth cookie.
+         // this is typically used to store data needed for signout from those protocols.
+         var additionalLocalClaims = new List<Claim>();
          additionalLocalClaims.AddRange(principal.Claims);
          var name = principal.FindFirst(JwtClaimTypes.Name)?.Value ?? user.Id;
 
@@ -114,10 +113,21 @@ namespace IdentityServerHost.Quickstart.UI
          if (picture == null) { picture = string.Empty; };
 
          additionalLocalClaims.Add(new Claim("picture", picture));
+
+         var email = result.Principal.Claims.Where(x => x.Type == "email").Select(x => x.Value).FirstOrDefault();
+         if (email == null) {
+            email = string.Empty;
+         }
+         additionalLocalClaims.Add(new Claim("email", email));
+
          var externalId = result.Principal.Claims.Where(x => x.Type == "externalId").Select(x => x.Value).FirstOrDefault();
 
          additionalLocalClaims.Add(new Claim("externalId", externalId));
 
+         var localSignInProps = new AuthenticationProperties();
+         ProcessLoginCallback(result, additionalLocalClaims, localSignInProps);
+
+         
          var isuser = new IdentityServerUser(user.Id) {
             DisplayName = name,
             IdentityProvider = provider,
