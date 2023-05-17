@@ -40,10 +40,20 @@ namespace IdentityServerAspNetIdentity
                 ClientId = "client",
                 ClientSecrets = { new Secret("secret".Sha256()) },
 
-                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
+                AllowedGrantTypes = GrantTypes.ResourceOwnerPassword, 
                 // scopes that client has access to
                 AllowedScopes = { "api1",   
                     IdentityServerConstants.StandardScopes.Profile, }
+            },
+            new Client
+            {
+               ClientId = "no-pwd-client",
+               ClientSecrets = { new Secret("secret".Sha256()) },
+
+               AllowedGrantTypes = GrantTypes.ClientCredentials, 
+               // scopes that client has access to
+               AllowedScopes = { "api1",
+                  IdentityServerConstants.StandardScopes.Profile, }
             },
 
             // interactive ASP.NET Core MVC client
